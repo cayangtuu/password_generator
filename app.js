@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const exphbs = require("express-handlebars")
+const generatePassword = require("./generate_password")
 const port = 3000
 
 app.engine("handlebars", exphbs({ defaultLayout: "main" }))
@@ -13,8 +14,8 @@ app.get("/", (req, res) => {
 })
 
 app.post("/", (req, res) => {
-  console.log(req.body)
-  res.render('index')
+  const password = generatePassword(req.body)
+  res.render('index', { password:password })
 })
 
 app.listen(port, () => {
