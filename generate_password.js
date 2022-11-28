@@ -1,7 +1,7 @@
 // define sample function to randomly return an item in an array
 function sample(collection) {
-    const index = Math.floor(Math.random()*collection.length)
-    return collection[index]
+  const index = Math.floor(Math.random() * collection.length)
+  return collection[index]
 }
 
 function generatePassword(options) {
@@ -30,9 +30,14 @@ function generatePassword(options) {
   }
 
   // remove things user do not need
-  collection = collection.filter( 
-    character => ! options.excludeCharacters.includes(character)
+  collection = collection.filter(
+    character => !options.excludeCharacters.includes(character)
   )
+
+  // return error notice if collection is empty
+  if (collection.length === 0) {
+    return 'There is no valid character in your selection.'
+  }
 
   // start generating password
   let password = ''
